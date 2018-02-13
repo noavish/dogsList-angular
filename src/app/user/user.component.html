@@ -1,0 +1,12 @@
+<h3>Log in:</h3>
+<div>
+  <label> User Name:
+      <input type='text' [(ngModel)]="name" placeholder='User Name' />
+  </label> 
+  <label> Password:
+      <input type='text' [(ngModel)]="password" placeholder='Password' />      
+  </label>
+  <input type="button" name="logIn" value="Log In" (click)="userLogIn()"/>
+</div>
+<h2> Welcome {{connectedUser ? connectedUser.userName : 'guest'}}</h2>
+<div style="text-align:center">

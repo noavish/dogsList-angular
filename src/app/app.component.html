@@ -1,20 +1,53 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<app-user></app-user>
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+    <h1>
+        Welcome to {{ title }}!
+      </h1>
+    <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">    
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class='container' *ngIf="isUserLoggedIn == true">
+    <h3>Add a new dog:</h3>
+    <div>
+      <label> Name:
+          <input type='text' [(ngModel)]="name" placeholder='Dog Name' />
+      </label> 
+      <label> Weight:
+          <input type='text' [(ngModel)]="weight" placeholder='Dog Weight' />      
+      </label>
+      <label> Birth Date:
+          <input type='text' [(ngModel)]="birthDate" placeholder='Dog Birth Day' />      
+      </label>
+      <input type="button" name="btnAddDog" (click)="addDog()" value="Add dog" />
+    </div>
+    <hr>
+    Dogs:
+    <li *ngFor="let dog of dogs; let i = index">
+        {{i + 1}}) {{dog.name| uppercase}} - {{dog.weight}}kgs - was born on {{dog.birthDate | date: dog.toggle ? 'fullDate' : 'shortDate'}} 
+        <button (click)="toggleFormat(i)">{{dog.icon}}</button>
+        <button (click)="removeDog(i)">X</button>
+    </li>
+    <hr>
+    <!-- <h3>Add a new dog:</h3>
+    <div>
+      <label> Name:
+          <input type='text' [(ngModel)]="dogName" placeholder='Dog Name' />
+      </label> 
+      <label> Weight:
+          <input type='text' [(ngModel)]="dogWeight" placeholder='Dog Weight' />      
+      </label>
+      <label> Birth Date:
+          <input type='text' [(ngModel)]="dogBirthDate" placeholder='Dog Birth Day' />      
+      </label>
+      <input type="button" name="btnAddDog" (click)="addDog()" value="Add dog" />
+    </div>
+    <hr> -->
+    Cats:
+    <li *ngFor="let cat of cats; let i = index">
+        {{i + 1}}) {{cat.name| uppercase}} - {{cat.weight}}kgs - was born on {{cat.birthDate | date: cat.toggle ? 'fullDate' : 'shortDate'}} 
+        <button (click)="toggleFormat(i)">{{cat.icon}}</button>
+        <button (click)="toggleFormat(i)">X</button>
+    </li>
+</div>
+
+
 
