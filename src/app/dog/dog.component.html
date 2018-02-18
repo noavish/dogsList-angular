@@ -1,3 +1,13 @@
-<p>
-  dog works!
-</p>
+<!--<app-dog-editor (dogAdded)="addLastUpdated($event)" (editedDog)="savedEdit($event)" [tempDog]="selectedDog"></app-dog-editor>-->
+<h4 *ngIf="lastUpdated.length > 0">{{ lastUpdated }}</h4>
+<h3>{{title}}</h3>
+<h4 *ngIf="filter != undefined">Filtering dogs by name: {{filter}}</h4>
+<ul>
+    <li *ngFor="let dog of dogs; let i = index">
+        {{i + 1}}) {{dog.name| uppercase}} - {{dog.weight}}kgs - was born on {{dog.birthDate | date: dog.toggle ? 'fullDate' : 'shortDate'}}
+        <span *ngIf="dog.wasEdited == true"> - updated just now!</span>
+        <button (click)="toggleFormat(i)">{{dog.icon}}</button>
+        <a routerLink='edit-dog/{{dog.id}}'><button type="button"> Edit </button></a>
+        <button (click)="removeDog(i)">X</button>
+    </li>
+</ul>

@@ -10,12 +10,12 @@ import { UserService } from './user/user.service';
 })
 
 export class AppComponent implements OnInit {
+  title = 'my first angular 2.0 adventure';
+  sayHello: any;
 
   constructor(
     private catService: CatService, private userService: UserService) {}
     
-  sayHello: any;
-  
   // cats: any[];
 
   get isUserLoggedIn(){
@@ -31,9 +31,7 @@ export class AppComponent implements OnInit {
     window.clearInterval(this.sayHello);	
   }
 
-  title = 'my first angular 2.0 adventure';
-  
-  // addCat() {
+   // addCat() {
   //   this.cats.push({name: this.name, weight: this.weight, birthDate: this.birthDate, toggle: true, icon: '-'});
   // }
   

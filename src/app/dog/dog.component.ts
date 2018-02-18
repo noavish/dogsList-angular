@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DogService } from './dog.service';
-
+import { Dog } from './dog';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-dog',
@@ -8,25 +9,28 @@ import { DogService } from './dog.service';
   styleUrls: ['./dog.component.css']
 })
 export class DogComponent implements OnInit {
+  dogs: any[];
+  title = 'Dogs:';
+  selectedDog: Dog = new Dog();
+  lastUpdated = '';
+  filter: string;
 
-  constructor(
-    private dogService: DogService) { }
-    
-    name: string;
-    weight: number;
-    birthDate: Date;
-    dogs: any[];
-
-  ngOnInit() {
-    this.dogs = this.dogService.getDogs();
+  constructor(private dogService: DogService, private route: ActivatedRoute) {
   }
 
-  addDog() {
-    this.dogs.push({name: this.name, weight: this.weight, birthDate: this.birthDate, toggle: true, icon: '-'});
+  ngOnInit() {
+    this.route.queryParams.subscribe(queryParams => {
+      if (queryParams.name) {
+        this.filter = queryParams.name;
+        this.dogs = this.dogService.getDogsByName(queryParams.name);
+      } else {
+        this.dogs = this.dogService.getDogs();
+      }
+    });
   }
 
   toggleFormat(i) {
-    this.dogs[i].toggle = !this.dogs[i].toggle; 
+    this.dogs[i].toggle = !this.dogs[i].toggle;
     if (this.dogs[i].toggle) {
       this.dogs[i].icon = '-';
     } else {
@@ -36,6 +40,20 @@ export class DogComponent implements OnInit {
 
   removeDog(i) {
     this.dogService.deleteDog(i);
+  }
+
+  editDog(dog: Dog) {
+    this.selectedDog = Object.assign({}, dog);
+  }
+
+  addLastUpdated(dog: Dog) {
+    this.lastUpdated = "Last dog added: " + new Date().toString() + ", name: " + dog.name;
+  }
+
+  savedEdit(event: Dog) {
+    let savedDog = this.dogs.find((dog) => dog.id == event.id);
+    savedDog.wasEdited = true;
+    Object.assign(event, savedDog);
   }
 
 }

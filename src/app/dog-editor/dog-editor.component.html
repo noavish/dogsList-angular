@@ -1,0 +1,18 @@
+<h3>Add a new dog:</h3>
+<div>
+  <label> Name:
+      <input type='text' [(ngModel)]="tempDog.name" placeholder='Dog Name' />
+  </label>
+  <label> Weight:
+      <input type='text' [(ngModel)]="tempDog.weight" placeholder='Dog Weight' />
+  </label>
+  <label> Birth Date:
+      <input type='text' [(ngModel)]="tempDog.birthDate" placeholder='Dog Birth Day' />
+  </label>
+    <input type="button" name="btnAddDog" (click)="tempDog.id ? editDog() : addDog()" value="{{tempDog.id ? 'Edit Dog' : 'Add Dog'}}" />
+    <input type="button" name="btnACancel"  (click)="cancelEdit()" *ngIf="tempDog.id" value='Cancel Edit' />
+</div>
+
+
+    <!-- span *ngIf="dogWeight < 10" ngClass="message">{{dogName}} is underweight</span-->
+    <span *ngIf="tempDog.weight < 10" [ngClass]="{'warning' : tempDog.weight < 5, 'message': true }">{{tempDog.name}} is underweight</span>
